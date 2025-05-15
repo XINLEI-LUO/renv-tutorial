@@ -3,3 +3,38 @@ title: "analysis"
 format: html
 ---
 
+```{r}
+library(palmerpenguins)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+renv::snapshot()
+```
+
+```{r}
+head(penguins)
+```
+
+## Summary Table
+
+```{r}
+penguins %>%
+  group_by(species) %>%
+  summarise(
+    mean_bill_length = mean(bill_length_mm, na.rm = TRUE),
+    mean_body_mass = mean(body_mass_g, na.rm = TRUE)
+  )
+```
+
+## Scatterplot: Flipper Length vs. Body Mass
+
+```{r fig-flipper}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  theme_minimal()
+```
+As shown in @fig-flipper, the scatterplot displays species differences in body size.
+
+
